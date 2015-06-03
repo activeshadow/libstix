@@ -1,6 +1,6 @@
-# freestix/libstix/indicator #
+# FreeSTIX/libstix/indicator #
 
-[![GoDoc](https://godoc.org/github.com/jordan2175/freestix/libstix/indicator?status.png)](https://godoc.org/github.com/jordan2175/freestix/libstix/indicator)
+[![GoDoc](https://godoc.org/github.com/freestix/libstix/indicator?status.png)](https://godoc.org/github.com/freestix/libstix/indicator)
 
 ## Contributing ##
 

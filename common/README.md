@@ -1,6 +1,6 @@
-# freestix/libstix/common #
+# FreeSTIX/libstix/common #
 
-[![GoDoc](https://godoc.org/github.com/jordan2175/freestix/libstix/common?status.png)](https://godoc.org/github.com/jordan2175/freestix/libstix/common)
+[![GoDoc](https://godoc.org/github.com/freestix/libstix/common?status.png)](https://godoc.org/github.com/freestix/libstix/common)
 
 ## Contributing ##
 

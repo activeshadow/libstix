@@ -1,6 +1,6 @@
-# freestix/libstix/ttp #
+# FreeSTIX/libstix/ttp #
 
-[![GoDoc](https://godoc.org/github.com/jordan2175/freestix/libstix/ttp?status.png)](https://godoc.org/github.com/jordan2175/freestix/libstix/ttp)
+[![GoDoc](https://godoc.org/github.com/freestix/libstix/ttp?status.png)](https://godoc.org/github.com/freestix/libstix/ttp)
 
 ## Contributing ##
 
