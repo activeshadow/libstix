@@ -10,7 +10,7 @@ package common
 
 import (
 	"code.google.com/p/go-uuid/uuid"
-	"github.com/jordan2175/freestix/libstix/defs"
+	"github.com/freestix/libstix/defs"
 )
 
 type IdentityType struct {

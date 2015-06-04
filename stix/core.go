@@ -10,9 +10,9 @@ package stix
 
 import (
 	"code.google.com/p/go-uuid/uuid"
-	"github.com/jordan2175/freestix/libstix/defs"
-	"github.com/jordan2175/freestix/libstix/indicator"
-	"github.com/jordan2175/freestix/libstix/ttp"
+	"github.com/freestix/libstix/defs"
+	"github.com/freestix/libstix/indicator"
+	"github.com/freestix/libstix/ttp"
 )
 
 // I needed this for JSON so that you could get an outer container called stixPackage

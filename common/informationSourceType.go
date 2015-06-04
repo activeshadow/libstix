@@ -10,7 +10,7 @@
 package common
 
 import (
-	"github.com/jordan2175/freestix/libcybox/common"
+	"github.com/freestix/libcybox/common"
 )
 
 type InformationSourceType struct {

@@ -12,9 +12,9 @@ package indicator
 
 import (
 	"code.google.com/p/go-uuid/uuid"
-	"github.com/jordan2175/freestix/libcybox/cybox"
-	"github.com/jordan2175/freestix/libstix/common"
-	"github.com/jordan2175/freestix/libstix/defs"
+	"github.com/freestix/libcybox/cybox"
+	"github.com/freestix/libstix/common"
+	"github.com/freestix/libstix/defs"
 	"time"
 )
 

@@ -3,8 +3,8 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/jordan2175/freestix/libstix/indicator"
-	"github.com/jordan2175/freestix/libstix/stix"
+	"github.com/freestix/libstix/indicator"
+	"github.com/freestix/libstix/stix"
 )
 
 func main() {

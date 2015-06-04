@@ -9,7 +9,7 @@
 package common
 
 import (
-	"github.com/jordan2175/freestix/libcybox/cybox"
+	"github.com/freestix/libcybox/cybox"
 )
 
 type RelatedObservableType struct {

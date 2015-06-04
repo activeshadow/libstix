@@ -9,7 +9,7 @@
 package ttp
 
 import (
-	"github.com/jordan2175/freestix/libstix/common"
+	"github.com/freestix/libstix/common"
 )
 
 type TTPsType struct {
