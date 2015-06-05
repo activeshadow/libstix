@@ -18,6 +18,10 @@ import (
 	"time"
 )
 
+// ----------------------------------------------------------------------
+// Define Message Type
+// ----------------------------------------------------------------------
+
 type CompositeIndicatorExpressionType struct {
 	Operator  string         `json:"operator,omitempty"`
 	Indicator *IndicatorType `json:"indicator,omitempty"`
@@ -35,7 +39,7 @@ type IndicatorType struct {
 	Version                      string                               `json:"version,omitempty"`
 	Negate                       bool                                 `json:"negate,omitempty"`
 	Title                        string                               `json:"title,omitempty"`
-	Types                        map[string][]string                  `json:"type,omitempty"`
+	Types                        []string                             `json:"type,omitempty"`
 	AlternativeIDs               []string                             `json:"alternative_ids,omitempty"`
 	Descriptions                 []map[string]string                  `json:"descriptions,omitempty"`
 	ShortDescriptions            []map[string]string                  `json:"short_descriptions,omitempty"`
@@ -78,6 +82,21 @@ type ValidTimeType struct {
 }
 
 // ----------------------------------------------------------------------
+// Create Functions
+// ----------------------------------------------------------------------
+
+func New() IndicatorType {
+	obj := CreateIndicator()
+	obj.CreateId()
+	return obj
+}
+
+func CreateIndicator() IndicatorType {
+	var obj IndicatorType
+	return obj
+}
+
+// ----------------------------------------------------------------------
 // Methods IndicatorType
 // ----------------------------------------------------------------------
 
@@ -89,7 +108,7 @@ func (this *IndicatorType) AddIdRef(idref string) {
 	this.IdRef = idref
 }
 
-func (this *IndicatorType) CreateTimeStamp() {
+func (this *IndicatorType) SetTimestampToNow() {
 	this.Timestamp = time.Now().Format(time.RFC3339)
 }
 
@@ -110,17 +129,24 @@ func (this *IndicatorType) AddTitle(t string) {
 	this.Title = t
 }
 
-func (this *IndicatorType) AddType(vocab, value string) {
+// func (this *IndicatorType) AddType(vocab, value string) {
+// 	if this.Types == nil {
+// 		m := make(map[string][]string)
+// 		this.Types = m
+// 	}
+// 	this.Types[vocab] = append(this.Types[vocab], value)
+// }
+
+// func (this *IndicatorType) AddStandardType(value string) {
+// 	this.AddType(defs.INDICATOR_TYPE_VOCAB, value)
+// }
+
+func (this *IndicatorType) AddType(value string) {
 	if this.Types == nil {
-		m := make(map[string][]string)
-		this.Types = m
+		a := make([]string, 0)
+		this.Types = a
 	}
-
-	this.Types[vocab] = append(this.Types[vocab], value)
-}
-
-func (this *IndicatorType) AddStandardType(value string) {
-	this.AddType(defs.INDICATOR_TYPE_VOCAB, value)
+	this.Types = append(this.Types, value)
 }
 
 func (this *IndicatorType) AddAlternativeID(value string) {

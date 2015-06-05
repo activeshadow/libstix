@@ -1,3 +1,9 @@
+// Copyright 2015 Bret Jordan, All rights reserved.
+//
+// Use of this source code is governed by an Apache 2.0 license
+// that can be found in the LICENSE file in the root of the source
+// tree.
+
 package main
 
 import (
@@ -12,10 +18,9 @@ func main() {
 	s := stix.New()
 
 	i1 := indicator.New()
-	i1.CreateId()
 	i1.AddIdRef("companyfoo:indicator-1234-1234-1234-1234")
 	i1.AddVersion("2.0")
-	i1.CreateTimeStamp()
+	i1.SetTimestampToNow()
 	i1.SetNegate(false)
 	i1.AddTitle("Some really neat indicator that we found")
 	i1.AddStandardType("URL Watchlist")

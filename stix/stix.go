@@ -4,15 +4,13 @@
 // that can be found in the LICENSE file in the root of the source
 // tree.
 
-// Version: 0.1
-
 package stix
 
 import (
 	"code.google.com/p/go-uuid/uuid"
 	"github.com/freestix/libstix/defs"
-	// "github.com/freestix/libstix/indicator"
-	// "github.com/freestix/libstix/ttp"
+	"github.com/freestix/libstix/indicator"
+	"github.com/freestix/libstix/ttp"
 	"time"
 )
 
@@ -25,12 +23,12 @@ type StixPackageType struct {
 }
 
 type StixMessageType struct {
-	Id        string `json:"id,omitempty"`
-	IdRef     string `json:"idref,omitempty"`
-	Timestamp string `json:"timestamp,omitempty"`
-	Version   string `json:"version,omitempty"`
-	// Indicators []indicator.IndicatorType `json:"indicators,omitempty"`
-	// TTPs       *ttp.TTPsType             `json:"ttps,omitempty"`
+	Id         string                    `json:"id,omitempty"`
+	IdRef      string                    `json:"idref,omitempty"`
+	Timestamp  string                    `json:"timestamp,omitempty"`
+	Version    string                    `json:"version,omitempty"`
+	Indicators []indicator.IndicatorType `json:"indicators,omitempty"`
+	TTPs       *ttp.TTPsType             `json:"ttps,omitempty"`
 }
 
 // ----------------------------------------------------------------------
@@ -71,14 +69,14 @@ func (this *StixPackageType) SetTimestampToNow() {
 	this.StixMessage.Timestamp = time.Now().Format(time.RFC3339)
 }
 
-// func (this *StixPackageType) AddIndicator(i indicator.IndicatorType) {
-// 	if this.StixMessage.Indicators == nil {
-// 		a := make([]indicator.IndicatorType, 0)
-// 		this.StixMessage.Indicators = a
-// 	}
-// 	this.StixMessage.Indicators = append(this.StixMessage.Indicators, i)
-// }
+func (this *StixPackageType) AddIndicator(i indicator.IndicatorType) {
+	if this.StixMessage.Indicators == nil {
+		a := make([]indicator.IndicatorType, 0)
+		this.StixMessage.Indicators = a
+	}
+	this.StixMessage.Indicators = append(this.StixMessage.Indicators, i)
+}
 
-// func (this *StixPackageType) AddTTPs(t ttp.TTPsType) {
-// 	this.StixMessage.TTPs = &t
-// }
+func (this *StixPackageType) AddTTPs(t ttp.TTPsType) {
+	this.StixMessage.TTPs = &t
+}

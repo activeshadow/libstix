@@ -9,39 +9,30 @@
 package indicator
 
 // ----------------------------------------------------------------------
-// Top level object - stix.indicator
-// ----------------------------------------------------------------------
-
-func New() IndicatorType {
-	var i IndicatorType
-	return i
-}
-
-// ----------------------------------------------------------------------
 // Objects from stix.indicator
 // ----------------------------------------------------------------------
 
 func CreateRelatedIndicator() RelatedIndicatorType {
-	var r RelatedIndicatorType
-	return r
+	var obj RelatedIndicatorType
+	return obj
 }
 
 func CreateRelatedIndicators() RelatedIndicatorsType {
-	var r RelatedIndicatorsType
-	return r
+	var obj RelatedIndicatorsType
+	return obj
 }
 
 func CreateRelatedObservables() RelatedObservablesType {
-	var r RelatedObservablesType
-	return r
+	var obj RelatedObservablesType
+	return obj
 }
 
 func CreateSighting() SightingType {
-	var s SightingType
-	return s
+	var obj SightingType
+	return obj
 }
 
 func CreateSightings() SightingsType {
-	var s SightingsType
-	return s
+	var obj SightingsType
+	return obj
 }

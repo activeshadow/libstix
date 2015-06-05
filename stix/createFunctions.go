@@ -4,69 +4,67 @@
 // that can be found in the LICENSE file in the root of the source
 // tree.
 
-// Version: 0.1
-
 package stix
 
-// import (
-// 	"github.com/freestix/libstix/common"
-// )
+import (
+	"github.com/freestix/libstix/common"
+)
 
-// // ----------------------------------------------------------------------
-// // Objects from stix.common
-// // ----------------------------------------------------------------------
+// ----------------------------------------------------------------------
+// Objects from stix.common
+// ----------------------------------------------------------------------
 
-// func CreateConfidence() common.ConfidenceType {
-// 	var c common.ConfidenceType
-// 	return c
-// }
+func CreateConfidence() common.ConfidenceType {
+	var obj common.ConfidenceType
+	return obj
+}
 
-// func CreateKillChain() common.KillChainType {
-// 	var k common.KillChainType
-// 	return k
-// }
+func CreateKillChain() common.KillChainType {
+	var obj common.KillChainType
+	return obj
+}
 
-// func CreateIdentity() common.IdentityType {
-// 	var i common.IdentityType
-// 	return i
-// }
+func CreateIdentity() common.IdentityType {
+	var obj common.IdentityType
+	return obj
+}
 
-// func CreateInformationSource() common.InformationSourceType {
-// 	var s common.InformationSourceType
-// 	return s
-// }
+func CreateInformationSource() common.InformationSourceType {
+	var obj common.InformationSourceType
+	return obj
+}
 
-// func CreateHandling() common.MarkingSpecificationType {
-// 	var m common.MarkingSpecificationType
-// 	return m
-// }
+func CreateHandling() common.MarkingSpecificationType {
+	var obj common.MarkingSpecificationType
+	return obj
+}
 
-// func CreateMarkingStructure() common.MarkingStructureType {
-// 	var m common.MarkingStructureType
-// 	return m
-// }
+func CreateMarkingStructure() common.MarkingStructureType {
+	var obj common.MarkingStructureType
+	return obj
+}
 
-// func CreateRelatedCampaign() common.RelatedCampaignReferenceType {
-// 	var r common.RelatedCampaignReferenceType
-// 	return r
-// }
+func CreateRelatedCampaign() common.RelatedCampaignReferenceType {
+	var obj common.RelatedCampaignReferenceType
+	return obj
+}
 
-// func CreateRelatedIdentity() common.RelatedIdentityType {
-// 	var r common.RelatedIdentityType
-// 	return r
-// }
+func CreateRelatedIdentity() common.RelatedIdentityType {
+	var obj common.RelatedIdentityType
+	return obj
+}
 
-// func CreateRelatedObservable() common.RelatedObservableType {
-// 	var r common.RelatedObservableType
-// 	return r
-// }
+func CreateRelatedObservable() common.RelatedObservableType {
+	var obj common.RelatedObservableType
+	return obj
+}
 
-// func CreateRelatedPackageRef() common.RelatedPackageRefType {
-// 	var p common.RelatedPackageRefType
-// 	return p
-// }
+func CreateRelatedPackageRef() common.RelatedPackageRefType {
+	var obj common.RelatedPackageRefType
+	return obj
+}
 
-// func CreateStatement() common.StatementType {
-// 	var s common.StatementType
-// 	return s
-// }
+func CreateStatement() common.StatementType {
+	var obj common.StatementType
+	return obj
+}

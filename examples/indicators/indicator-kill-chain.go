@@ -1,3 +1,9 @@
+// Copyright 2015 Bret Jordan, All rights reserved.
+//
+// Use of this source code is governed by an Apache 2.0 license
+// that can be found in the LICENSE file in the root of the source
+// tree.
+
 package main
 
 import (
@@ -11,8 +17,7 @@ import (
 func main() {
 	s := stix.Create()
 	i1 := indicator.Create()
-	i1.CreateId()
-	i1.CreateTimeStamp()
+	i1.SetTimestampToNow()
 	i1.AddTitle("Attack 2015-02")
 
 	// Create TTP and Cyber Kill Chain Definitions

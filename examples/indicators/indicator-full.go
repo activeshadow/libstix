@@ -1,3 +1,9 @@
+// Copyright 2015 Bret Jordan, All rights reserved.
+//
+// Use of this source code is governed by an Apache 2.0 license
+// that can be found in the LICENSE file in the root of the source
+// tree.
+
 package main
 
 import (
@@ -13,15 +19,13 @@ func main() {
 	s.AddNamespace("stixVocabs", "http://stix.mitre.org/default_vocabularies-1")
 	s.AddNamespace("example", "http://example.com")
 	s.AddSchemaLocation("http://stix.mitre.org/default_vocabularies-1", "http://stix.mitre.org/XMLSchema/default_vocabularies/1.1.1/stix_default_vocabularies.xsd")
-	s.CreateId()
 	s.AddIdRef("companyfoo:package-abcd-abcd-abcd-1234")
-	s.AddCurrentTime()
+	s.SetTimestampToNow()
 
 	i1 := indicator.Create()
-	i1.CreateId()
 	i1.AddIdRef("companyfoo:indicator-1234-1234-1234-1234")
 	i1.AddVersion("2.0")
-	i1.CreateTimeStamp()
+	i1.SetTimestampToNow()
 	i1.SetNegate(false)
 	i1.AddTitle("Some really neat indicator that we found")
 	i1.AddType("URL Watchlist")
