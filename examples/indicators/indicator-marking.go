@@ -9,13 +9,14 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/freestix/libstix/indicator"
 	"github.com/freestix/libstix/stix"
 )
 
 func main() {
+
 	s := stix.New()
-	i1 := indicator.New()
+	i1 := s.NewIndicator()
+
 	i1.SetTimestampToNow()
 	i1.AddTitle("Attack 2015-02")
 	i1.AddType("IP Watchlist")
@@ -26,8 +27,6 @@ func main() {
 	h.AddTLPMarking("Red")
 
 	i1.AddHandling(h)
-
-	s.AddIndicator(i1)
 
 	var data []byte
 	data, _ = json.MarshalIndent(s, "", "    ")

@@ -9,20 +9,16 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/freestix/libstix/indicator"
 	"github.com/freestix/libstix/stix"
 )
 
 func main() {
 
-	s := stix.Create()
-	s.AddNamespace("stixVocabs", "http://stix.mitre.org/default_vocabularies-1")
-	s.AddNamespace("example", "http://example.com")
-	s.AddSchemaLocation("http://stix.mitre.org/default_vocabularies-1", "http://stix.mitre.org/XMLSchema/default_vocabularies/1.1.1/stix_default_vocabularies.xsd")
-	s.AddIdRef("companyfoo:package-abcd-abcd-abcd-1234")
+	s := stix.New()
+	i1 := s.NewIndicator()
+
 	s.SetTimestampToNow()
 
-	i1 := indicator.Create()
 	i1.AddIdRef("companyfoo:indicator-1234-1234-1234-1234")
 	i1.AddVersion("2.0")
 	i1.SetTimestampToNow()
@@ -31,8 +27,8 @@ func main() {
 	i1.AddType("URL Watchlist")
 	i1.AddAlternativeID("CV-2014-12-12345")
 	i1.AddAlternativeID("CV-2015-02-54321")
-	i1.AddDescription("txt", "Some long description")
-	i1.AddShortDescription("txt", "Some shorter description")
+	i1.AddDescriptionText("", "Some long description")
+	i1.AddShortDescriptionText("", "Some shorter description")
 	i1.AddValidTimePosition("2015-01-01T00:00:00-0700", "2015-02-02T23:59:59-0700")
 	i1.AddValidTimePosition("2014-01-01T00:00:00-0700", "2014-02-02T23:59:59-0700")
 
@@ -88,12 +84,8 @@ func main() {
 
 	i1.AddProducer(source1)
 
-	i2 := indicator.Create()
-	i2.CreateId()
+	i2 := s.NewIndicator()
 	i2.SetNegate(true)
-
-	s.AddIndicator(i1)
-	s.AddIndicator(i2)
 
 	// fmt.Println(s.STIXPackage.Id)
 	// fmt.Println(s.STIXPackage.Indicators[0].Title)
@@ -101,7 +93,6 @@ func main() {
 	// fmt.Println(s.STIXPackage.Indicators[0].Producer.Identity.Name)
 	//fmt.Println(i)
 
-	fmt.Println("====================================")
 	var data []byte
 	data, _ = json.MarshalIndent(s, "", "    ")
 

@@ -9,14 +9,15 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/freestix/libstix/indicator"
 	"github.com/freestix/libstix/stix"
 	"github.com/freestix/libstix/ttp"
 )
 
 func main() {
-	s := stix.Create()
-	i1 := indicator.Create()
+
+	s := stix.New()
+	i1 := s.NewIndicator()
+
 	i1.SetTimestampToNow()
 	i1.AddTitle("Attack 2015-02")
 
@@ -44,7 +45,6 @@ func main() {
 	i1.AddKillChainPhaseAndChain(phase3Id, chainId)
 
 	s.AddTTPs(t)
-	s.AddIndicator(i1)
 
 	var data []byte
 	data, _ = json.MarshalIndent(s, "", "    ")

@@ -9,15 +9,14 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/freestix/libstix/indicator"
 	"github.com/freestix/libstix/stix"
 )
 
 func main() {
 
 	s := stix.New()
+	i1 := s.NewIndicator()
 
-	i1 := indicator.New()
 	i1.AddIdRef("companyfoo:indicator-1234-1234-1234-1234")
 	i1.AddVersion("2.0.alpha")
 	i1.SetTimestampToNow()
@@ -29,9 +28,6 @@ func main() {
 	i1.AddDescriptionText("", "Some long description")
 	i1.AddShortDescriptionText("", "Some shorter description")
 
-	s.AddIndicator(i1)
-
-	fmt.Println("====================================")
 	var data []byte
 	data, _ = json.MarshalIndent(s, "", "    ")
 
