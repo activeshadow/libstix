@@ -28,3 +28,9 @@ type IndicatorBaseType struct {
 	MarkingIdRefBaseType
 	Timestamp string `json:"timestamp,omitempty"`
 }
+
+type GenericRelationshipType struct {
+	Confidence        *ConfidenceType                 `json:"confidence,omitempty"`
+	InformationSource *InformationSourceType          `json:"information_source,omitempty"`
+	Relationship      *ControlledVocabularyStringType `json:"relationship,omitempty"`
+}
