@@ -9,35 +9,23 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/freestix/libcybox/object"
-	"github.com/freestix/libcybox/observable"
-	"github.com/freestix/libstix/indicator"
 	"github.com/freestix/libstix/stix"
 )
 
 func main() {
 	s := stix.New()
-	i1 := indicator.New()
+	i1 := s.NewIndicator()
+
 	i1.SetTimestampToNow()
 	i1.AddTitle("Attack 2015-02")
 	i1.AddType("IP Watchlist")
+	observable_i1 := i1.NewObservable()
+	properties_1 := observable_i1.GetObjectProperties()
 
-	o := observable.New()
-
-	obj := object.NewObject()
-
-	uriObj := object.NewProperties()
-	uriObj.AddType("URL")
-	uriObj.AddUriObject("http://foo.com")
-	uriObj.AddUriObject("http://bar.com")
-	uriObj.AddUriObject("http://fooandbar.com")
-
-	obj.AddProperties(uriObj)
-
-	o.AddObject(obj)
-
-	i1.AddObservable(o)
-	s.AddIndicator(i1)
+	properties_1.AddType("URL")
+	properties_1.AddEqualsUriValue("http://foo.com")
+	properties_1.AddEqualsUriValue("http://bar.com")
+	properties_1.AddEqualsUriValue("http://fooandbar.com")
 
 	var data []byte
 	data, _ = json.MarshalIndent(s, "", "    ")

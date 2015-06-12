@@ -210,6 +210,12 @@ func (this *IndicatorType) AddValidTimePosition(start, end string) {
 	this.ValidTimePositions = append(this.ValidTimePositions, tp)
 }
 
+func (this *IndicatorType) NewObservable() *observable.ObservableType {
+	o := observable.New()
+	this.AddObservable(o)
+	return this.Observable
+}
+
 func (this *IndicatorType) AddObservable(o observable.ObservableType) {
 	this.Observable = &o
 }

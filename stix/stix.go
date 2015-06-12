@@ -69,12 +69,20 @@ func (this *StixPackageType) SetTimestampToNow() {
 	this.StixMessage.Timestamp = time.Now().Format(time.RFC3339)
 }
 
-func (this *StixPackageType) AddIndicator(i indicator.IndicatorType) {
+func (this *StixPackageType) NewIndicator() *indicator.IndicatorType {
+	i := indicator.New()
+	slicePosition := this.AddIndicator(i)
+	return &this.StixMessage.Indicators[slicePosition]
+}
+
+func (this *StixPackageType) AddIndicator(i indicator.IndicatorType) int {
 	if this.StixMessage.Indicators == nil {
 		a := make([]indicator.IndicatorType, 0)
 		this.StixMessage.Indicators = a
 	}
+	positionThatAppendWillUse := len(this.StixMessage.Indicators)
 	this.StixMessage.Indicators = append(this.StixMessage.Indicators, i)
+	return positionThatAppendWillUse
 }
 
 func (this *StixPackageType) AddTTPs(t ttp.TTPsType) {
