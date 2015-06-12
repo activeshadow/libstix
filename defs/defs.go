@@ -4,8 +4,6 @@
 // that can be found in the LICENSE file in the root of the source
 // tree.
 
-// Version: 0.1
-
 package defs
 
 const (
@@ -13,4 +11,6 @@ const (
 	COMPANY_NS           = "http://example.com"
 	INDICATOR_TYPE_VOCAB = "stixVocabs:IndicatorTypeVocab-1.0"
 	MARKING_TLP_VOCAB    = "tlpMarking:TLPMarkingStructureType"
+	RFC6838TEXTPLAIN     = "text/plain"
+	RFC6838TEXTHTML      = "text/html"
 )

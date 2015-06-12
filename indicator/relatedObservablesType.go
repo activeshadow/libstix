@@ -4,31 +4,42 @@
 // that can be found in the LICENSE file in the root of the source
 // tree.
 
-// Version: 0.2
-
 package indicator
 
 import (
 	"github.com/freestix/libstix/common"
 )
 
+// ----------------------------------------------------------------------
+// Define Types
+// ----------------------------------------------------------------------
+
 type RelatedObservablesType struct {
 	Scope             string                         `json:"scope,omitempty"`
-	RelatedObservable []common.RelatedObservableType `json:"relatedObservable,omitempty"`
+	RelatedObservable []common.RelatedObservableType `json:"related_observable,omitempty"`
+}
+
+// ----------------------------------------------------------------------
+// Create Functions
+// ----------------------------------------------------------------------
+
+func CreateRelatedObservables() RelatedObservablesType {
+	var obj RelatedObservablesType
+	return obj
 }
 
 // ----------------------------------------------------------------------
 // Methods RelatedObservablesType
 // ----------------------------------------------------------------------
 
-func (r *RelatedObservablesType) AddScope(s string) {
-	r.Scope = s
+func (this *RelatedObservablesType) AddScope(s string) {
+	this.Scope = s
 }
 
-func (r *RelatedObservablesType) AddRelatedObservable(o common.RelatedObservableType) {
-	if r.RelatedObservable == nil {
+func (this *RelatedObservablesType) AddRelatedObservable(o common.RelatedObservableType) {
+	if this.RelatedObservable == nil {
 		a := make([]common.RelatedObservableType, 0)
-		r.RelatedObservable = a
+		this.RelatedObservable = a
 	}
-	r.RelatedObservable = append(r.RelatedObservable, o)
+	this.RelatedObservable = append(this.RelatedObservable, o)
 }

@@ -4,87 +4,108 @@
 // that can be found in the LICENSE file in the root of the source
 // tree.
 
-// Version: 0.2
-
 package indicator
 
 import (
 	"github.com/freestix/libstix/common"
+	"github.com/freestix/libstix/defs"
 	"time"
 )
 
+// ----------------------------------------------------------------------
+// Define Types
+// ----------------------------------------------------------------------
+
 type SightingsType struct {
-	SightingsCount int            `json:"sightingsCount,omitempty"`
+	SightingsCount int            `json:"sightings_count,omitempty"`
 	Sighting       []SightingType `json:"sighting,omitempty"`
 }
 
 type SightingType struct {
 	Timestamp          string                        `json:"timestamp,omitempty"`
-	TimestampPrecision string                        `json:"timestampPrecision,omitempty"`
+	TimestampPrecision string                        `json:"timestamp_precision,omitempty"`
 	Source             *common.InformationSourceType `json:"source,omitempty"`
 	References         []string                      `json:"references,omitempty"`
 	Confidence         *common.ConfidenceType        `json:"confidence,omitempty"`
 	Description        *common.StructuredTextType    `json:"description,omitempty"`
-	RelatedObservables *RelatedObservablesType       `json:"relatedObservables,omitempty"`
+	RelatedObservables *RelatedObservablesType       `json:"related_observables,omitempty"`
+}
+
+// ----------------------------------------------------------------------
+// Create Functions
+// ----------------------------------------------------------------------
+
+func CreateSighting() SightingType {
+	var obj SightingType
+	return obj
+}
+
+func CreateSightings() SightingsType {
+	var obj SightingsType
+	return obj
 }
 
 // ----------------------------------------------------------------------
 // Methods SightingsType
 // ----------------------------------------------------------------------
 
-func (s *SightingsType) SetSightingsCount(count int) {
-	s.SightingsCount = count
+func (this *SightingsType) SetSightingsCount(count int) {
+	this.SightingsCount = count
 }
 
-func (s *SightingsType) AddSighting(seen SightingType) {
-	if s.Sighting == nil {
+func (this *SightingsType) AddSighting(seen SightingType) {
+	if this.Sighting == nil {
 		a := make([]SightingType, 0)
-		s.Sighting = a
+		this.Sighting = a
 	}
-	s.Sighting = append(s.Sighting, seen)
+	this.Sighting = append(this.Sighting, seen)
 }
 
 // ----------------------------------------------------------------------
 // Methods SightingType
 // ----------------------------------------------------------------------
 
-func (s *SightingType) CreateTimeStamp() {
-	s.Timestamp = time.Now().Format(time.RFC3339)
+func (this *SightingType) CreateTimeStamp() {
+	this.Timestamp = time.Now().Format(time.RFC3339)
 }
 
-func (s *SightingType) AddTimeStamp(t string) {
+func (this *SightingType) AddTimeStamp(t string) {
 	// TODO Need to format the string in to ISO 8601 format or check that it is in the right format
-	s.Timestamp = t
+	this.Timestamp = t
 }
 
-func (s *SightingType) AddTimeStampPrecision(p string) {
-	s.TimestampPrecision = p
+func (this *SightingType) AddTimeStampPrecision(p string) {
+	this.TimestampPrecision = p
 }
 
-func (s *SightingType) AddSource(source common.InformationSourceType) {
-	s.Source = &source
+func (this *SightingType) AddSource(source common.InformationSourceType) {
+	this.Source = &source
 }
 
-func (s *SightingType) AddReference(r string) {
-	if s.References == nil {
+func (this *SightingType) AddReference(r string) {
+	if this.References == nil {
 		a := make([]string, 0)
-		s.References = a
+		this.References = a
 	}
-	s.References = append(s.References, r)
+	this.References = append(this.References, r)
 }
 
-func (s *SightingType) AddConfidence(c common.ConfidenceType) {
-	s.Confidence = &c
+func (this *SightingType) AddConfidence(c common.ConfidenceType) {
+	this.Confidence = &c
 }
 
-func (s *SightingType) AddDescription(value string) {
-	data := common.StructuredTextType{
-		StructuringFormat: "txt",
-		Value:             value,
-	}
-	s.Description = &data
+func (this *SightingType) AddDescriptionText(value string) {
+	this.AddDescription(defs.RFC6838TEXTPLAIN, value)
 }
 
-func (s *SightingType) AddRelatedObservables(r RelatedObservablesType) {
-	s.RelatedObservables = &r
+func (this *SightingType) AddDescription(format, value string) {
+	var data common.StructuredTextType
+	data.AddFormat(format)
+	data.AddValue(value)
+
+	this.Description = &data
+}
+
+func (this *SightingType) AddRelatedObservables(r RelatedObservablesType) {
+	this.RelatedObservables = &r
 }

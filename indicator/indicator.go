@@ -3,16 +3,12 @@
 // Use of this source code is governed by an Apache 2.0 license
 // that can be found in the LICENSE file in the root of the source
 // tree.
-//
-// Version: 0.1
-
-// STIX:Indicator
 
 package indicator
 
 import (
 	"code.google.com/p/go-uuid/uuid"
-	"github.com/freestix/libcybox/cybox"
+	"github.com/freestix/libcybox/observable"
 	"github.com/freestix/libstix/common"
 	"github.com/freestix/libstix/defs"
 	"time"
@@ -41,10 +37,10 @@ type IndicatorType struct {
 	Title                        string                               `json:"title,omitempty"`
 	Types                        []string                             `json:"type,omitempty"`
 	AlternativeIDs               []string                             `json:"alternative_ids,omitempty"`
-	Descriptions                 []map[string]string                  `json:"descriptions,omitempty"`
-	ShortDescriptions            []map[string]string                  `json:"short_descriptions,omitempty"`
+	Descriptions                 []common.StructuredTextType          `json:"descriptions,omitempty"`
+	ShortDescriptions            []common.StructuredTextType          `json:"short_descriptions,omitempty"`
 	ValidTimePositions           []ValidTimeType                      `json:"valid_time_positions,omitempty"`
-	Observable                   *cybox.ObservableType                `json:"observable,omitempty"`
+	Observable                   *observable.ObservableType           `json:"observable,omitempty"`
 	CompositeIndicatorExpression *CompositeIndicatorExpressionType    `json:"composite_indicator_expression,omitempty"`
 	IndicatedTTP                 []common.RelatedTTPType              `json:"indicated_ttps,omitempty"`
 	KillChainPhases              []common.KillChainPhaseReferenceType `json:"kill_chain_phases,omitempty"`
@@ -157,18 +153,42 @@ func (this *IndicatorType) AddAlternativeID(value string) {
 	this.AlternativeIDs = append(this.AlternativeIDs, value)
 }
 
-func (this *IndicatorType) AddDescription(format, value string) {
-	m := make(map[string]string)
-	m[format] = value
-
-	this.Descriptions = append(this.Descriptions, m)
+func (this *IndicatorType) AddDescriptionText(markingidref, value string) {
+	this.AddDescription(defs.RFC6838TEXTPLAIN, markingidref, value)
 }
 
-func (this *IndicatorType) AddShortDescription(format, value string) {
-	m := make(map[string]string)
-	m[format] = value
+func (this *IndicatorType) AddDescription(format, markingidref, value string) {
+	if this.Descriptions == nil {
+		a := make([]common.StructuredTextType, 0)
+		this.Descriptions = a
+	}
 
-	this.ShortDescriptions = append(this.ShortDescriptions, m)
+	var data common.StructuredTextType
+	data.CreateId()
+	data.AddMarkingIdRef(markingidref)
+	data.AddFormat(format)
+	data.AddValue(value)
+
+	this.Descriptions = append(this.Descriptions, data)
+}
+
+func (this *IndicatorType) AddShortDescriptionText(markingidref, value string) {
+	this.AddShortDescription(defs.RFC6838TEXTPLAIN, markingidref, value)
+}
+
+func (this *IndicatorType) AddShortDescription(format, markingidref, value string) {
+	if this.ShortDescriptions == nil {
+		a := make([]common.StructuredTextType, 0)
+		this.ShortDescriptions = a
+	}
+
+	var data common.StructuredTextType
+	data.CreateId()
+	data.AddMarkingIdRef(markingidref)
+	data.AddFormat(format)
+	data.AddValue(value)
+
+	this.ShortDescriptions = append(this.ShortDescriptions, data)
 }
 
 func (this *IndicatorType) initValidTimePosition() {
@@ -190,10 +210,7 @@ func (this *IndicatorType) AddValidTimePosition(start, end string) {
 	this.ValidTimePositions = append(this.ValidTimePositions, tp)
 }
 
-// AddObservable adds a relevant cyber observable for this Indicator.
-//
-// This support 0..1
-func (this *IndicatorType) AddObservable(o cybox.ObservableType) {
+func (this *IndicatorType) AddObservable(o observable.ObservableType) {
 	this.Observable = &o
 }
 
@@ -201,11 +218,6 @@ func (this *IndicatorType) AddObservable(o cybox.ObservableType) {
 
 // TODO Indicated_TTP
 
-// AddKillChain adds a relevant kill chain phases indicated by this Indicator.
-// This method would require that you set the PhaseId and KillChainId manually.
-// See AddKillChainPhaseAndChain()
-//
-// This support 0..n objects
 func (this *IndicatorType) AddKillChain(k common.KillChainPhaseReferenceType) {
 	if this.KillChainPhases == nil {
 		a := make([]common.KillChainPhaseReferenceType, 0)
@@ -214,10 +226,6 @@ func (this *IndicatorType) AddKillChain(k common.KillChainPhaseReferenceType) {
 	this.KillChainPhases = append(this.KillChainPhases, k)
 }
 
-// AddKillChainPhaseAndChain adds a relevant kill chain phases indicated by this
-// Indicator.
-//
-// This support 0..n objects
 func (this *IndicatorType) AddKillChainPhaseAndChain(phase, chain string) {
 	if this.KillChainPhases == nil {
 		a := make([]common.KillChainPhaseReferenceType, 0)
@@ -232,24 +240,10 @@ func (this *IndicatorType) AddKillChainPhaseAndChain(phase, chain string) {
 
 // TODO Test_Mechanisms
 
-// AddLikelyImpact the likely potential impact within the relevant context if
-// this Indicator were to occur. This is typically local to an Indicator consumer
-// and not typically shared. This field includes a Description of the likely
-// potential impact within the relevant context if this Indicator were to
-// occur and a Confidence held in the accuracy of this assertion. NOTE: This
-// structure potentially still needs to be fleshed out more for structured
-// characterization of impact.
-//
-// This support 0..1 objects
 func (this *IndicatorType) AddLikelyImpact(s common.StatementType) {
 	this.LikelyImpact = &s
 }
 
-// AddHandling adds the relevant handling guidance for this Indicator. The valid
-// marking scope is the nearest IndicatorBaseType ancestor of this Handling
-// element and all its descendants.
-//
-// This supports 0..n objects
 func (this *IndicatorType) AddHandling(m common.MarkingSpecificationType) {
 	if this.Handling == nil {
 		a := make([]common.MarkingSpecificationType, 0)
@@ -258,37 +252,20 @@ func (this *IndicatorType) AddHandling(m common.MarkingSpecificationType) {
 	this.Handling = append(this.Handling, m)
 }
 
-// AddConfidence adds a level of confidence held in the accuracy of this
-// Indicator.
-//
-// This supports 0..1 objects
 func (this *IndicatorType) AddConfidence(c common.ConfidenceType) {
 	this.Confidence = &c
 }
 
-// AddSightings adds a set of sighting reports for this Indicator.
-//
-// This supports 0..1 objects
 func (this *IndicatorType) AddSightings(s SightingsType) {
 	this.Sightings = &s
 }
 
-// AddRelatedIndicators add an optional related indicator and enables content
-// producers to express a relationship between the enclosing indicator (this.e.,
-// the subject of the relationship) and a disparate indicator (this.e., the object
-// side of the relationship).
-//
-// This supports 0..1 objects
 func (this *IndicatorType) AddRelatedIndicators(r RelatedIndicatorsType) {
 	this.RelatedIndicators = &r
 }
 
 // TODO Related_Campaigns
 
-// AddRelatedPackages identifies or characterizes relationships to a set of
-// related Packages.
-//
-// This supports 0..n
 func (this *IndicatorType) AddRelatedPackage(p common.RelatedPackageRefType) {
 	if this.RelatedPackages == nil {
 		a := make([]common.RelatedPackageRefType, 0)
@@ -297,9 +274,6 @@ func (this *IndicatorType) AddRelatedPackage(p common.RelatedPackageRefType) {
 	this.RelatedPackages = append(this.RelatedPackages, p)
 }
 
-// AddProducer adds details for the source of this indicator.
-//
-// This supports 0..1 objects
 func (this *IndicatorType) AddProducer(source common.InformationSourceType) {
 	this.Producer = &source
 }

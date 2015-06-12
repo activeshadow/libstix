@@ -4,8 +4,6 @@
 // that can be found in the LICENSE file in the root of the source
 // tree.
 
-// Version: 0.2
-
 package common
 
 import (
@@ -13,16 +11,20 @@ import (
 	"github.com/freestix/libstix/defs"
 )
 
+// ----------------------------------------------------------------------
+// Define Types
+// ----------------------------------------------------------------------
+
 type IdentityType struct {
 	Id                string                `json:"id,omitempty"`
 	IdRef             string                `json:"idref,omitempty"`
 	Name              string                `json:"name,omitempty"`
-	RelatedIdentities []RelatedIdentityType `json:"relatedIdentites,omitempty"`
+	RelatedIdentities []RelatedIdentityType `json:"related_identites,omitempty"`
 }
 
 type RelatedIdentityType struct {
 	Confidence        *ConfidenceType                 `json:"confidence,omitempty"`
-	InformationSource *InformationSourceType          `json:"informationSource,omitempty"`
+	InformationSource *InformationSourceType          `json:"information_source,omitempty"`
 	Relationship      *ControlledVocabularyStringType `json:"relationship,omitempty"`
 	Identity          *IdentityType                   `json:"identity,omitempty"`
 }
@@ -31,47 +33,47 @@ type RelatedIdentityType struct {
 // Methods IdentityType
 // ----------------------------------------------------------------------
 
-func (i *IdentityType) CreateId() {
-	i.Id = defs.COMPANY + ":identity-" + uuid.New()
+func (this *IdentityType) CreateId() {
+	this.Id = defs.COMPANY + ":identity-" + uuid.New()
 }
 
-func (i *IdentityType) AddIdRef(idref string) {
-	i.IdRef = idref
+func (this *IdentityType) AddIdRef(idref string) {
+	this.IdRef = idref
 }
 
-func (i *IdentityType) AddName(name string) {
-	i.Name = name
+func (this *IdentityType) AddName(name string) {
+	this.Name = name
 }
 
-func (i *IdentityType) AddRelatedIdentity(iden RelatedIdentityType) {
-	if i.RelatedIdentities == nil {
+func (this *IdentityType) AddRelatedIdentity(iden RelatedIdentityType) {
+	if this.RelatedIdentities == nil {
 		a := make([]RelatedIdentityType, 0)
-		i.RelatedIdentities = a
+		this.RelatedIdentities = a
 	}
-	i.RelatedIdentities = append(i.RelatedIdentities, iden)
+	this.RelatedIdentities = append(this.RelatedIdentities, iden)
 }
 
 // ----------------------------------------------------------------------
 // Methods RelatedIdentityType
 // ----------------------------------------------------------------------
 
-func (r *RelatedIdentityType) AddConfidence(c ConfidenceType) {
-	r.Confidence = &c
+func (this *RelatedIdentityType) AddConfidence(c ConfidenceType) {
+	this.Confidence = &c
 }
 
-func (r *RelatedIdentityType) AddInformationSource(source InformationSourceType) {
-	r.InformationSource = &source
+func (this *RelatedIdentityType) AddInformationSource(source InformationSourceType) {
+	this.InformationSource = &source
 }
 
-func (r *RelatedIdentityType) AddRelationshipDetail(name, ref, value string) {
+func (this *RelatedIdentityType) AddRelationshipDetail(name, ref, value string) {
 	data := ControlledVocabularyStringType{
 		VocabName:      name,
 		VocabReference: ref,
 		Value:          value,
 	}
-	r.Relationship = &data
+	this.Relationship = &data
 }
 
-func (r *RelatedIdentityType) AddIdentity(id IdentityType) {
-	r.Identity = &id
+func (this *RelatedIdentityType) AddIdentity(id IdentityType) {
+	this.Identity = &id
 }

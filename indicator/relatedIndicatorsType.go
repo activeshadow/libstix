@@ -4,17 +4,19 @@
 // that can be found in the LICENSE file in the root of the source
 // tree.
 
-// Version: 0.2
-
 package indicator
 
 import (
 	"github.com/freestix/libstix/common"
 )
 
+// ----------------------------------------------------------------------
+// Define Types
+// ----------------------------------------------------------------------
+
 type RelatedIndicatorsType struct {
 	Scope            string                 `json:"scope,omitempty"`
-	RelatedIndicator []RelatedIndicatorType `json:"relatedIndicators,omitempty"`
+	RelatedIndicator []RelatedIndicatorType `json:"related_indicators,omitempty"`
 }
 
 type RelatedIndicatorType struct {
@@ -23,42 +25,56 @@ type RelatedIndicatorType struct {
 }
 
 // ----------------------------------------------------------------------
+// Create Functions
+// ----------------------------------------------------------------------
+
+func CreateRelatedIndicator() RelatedIndicatorType {
+	var obj RelatedIndicatorType
+	return obj
+}
+
+func CreateRelatedIndicators() RelatedIndicatorsType {
+	var obj RelatedIndicatorsType
+	return obj
+}
+
+// ----------------------------------------------------------------------
 // Methods RelatedIndicatorsType
 // ----------------------------------------------------------------------
 
-func (r *RelatedIndicatorsType) AddScope(s string) {
-	r.Scope = s
+func (this *RelatedIndicatorsType) AddScope(s string) {
+	this.Scope = s
 }
 
-func (r *RelatedIndicatorsType) AddRelatedIndicator(i RelatedIndicatorType) {
-	if r.RelatedIndicator == nil {
+func (this *RelatedIndicatorsType) AddRelatedIndicator(i RelatedIndicatorType) {
+	if this.RelatedIndicator == nil {
 		a := make([]RelatedIndicatorType, 0)
-		r.RelatedIndicator = a
+		this.RelatedIndicator = a
 	}
-	r.RelatedIndicator = append(r.RelatedIndicator, i)
+	this.RelatedIndicator = append(this.RelatedIndicator, i)
 }
 
 // ----------------------------------------------------------------------
 // Methods RelatedIndicatorType
 // ----------------------------------------------------------------------
 
-func (r *RelatedIndicatorType) AddConfidence(c common.ConfidenceType) {
-	r.Confidence = &c
+func (this *RelatedIndicatorType) AddConfidence(c common.ConfidenceType) {
+	this.Confidence = &c
 }
 
-func (r *RelatedIndicatorType) AddInformationSource(i common.InformationSourceType) {
-	r.InformationSource = &i
+func (this *RelatedIndicatorType) AddInformationSource(i common.InformationSourceType) {
+	this.InformationSource = &i
 }
 
-func (r *RelatedIndicatorType) AddRelationshipDetail(name, ref, value string) {
+func (this *RelatedIndicatorType) AddRelationshipDetail(name, ref, value string) {
 	data := common.ControlledVocabularyStringType{
 		VocabName:      name,
 		VocabReference: ref,
 		Value:          value,
 	}
-	r.Relationship = &data
+	this.Relationship = &data
 }
 
-func (r *RelatedIndicatorType) AddIndicator(i IndicatorType) {
-	r.Indicator = &i
+func (this *RelatedIndicatorType) AddIndicator(i IndicatorType) {
+	this.Indicator = &i
 }

@@ -14,8 +14,8 @@ import (
 )
 
 func main() {
-	s := stix.Create()
-	i1 := indicator.Create()
+	s := stix.New()
+	i1 := indicator.New()
 	i1.SetTimestampToNow()
 	i1.AddTitle("Attack 2015-02")
 	i1.AddType("IP Watchlist")

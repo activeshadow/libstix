@@ -4,40 +4,42 @@
 // that can be found in the LICENSE file in the root of the source
 // tree.
 
-// Version: 0.2
-
 package common
 
 import (
-	"github.com/freestix/libcybox/cybox"
+	"github.com/freestix/libcybox/observable"
 )
+
+// ----------------------------------------------------------------------
+// Define Types
+// ----------------------------------------------------------------------
 
 type RelatedObservableType struct {
 	GenericRelationshipType
-	Observable *cybox.ObservableType `json:"observable,omitempty"`
+	Observable *observable.ObservableType `json:"observable,omitempty"`
 }
 
 // ----------------------------------------------------------------------
 // Methods RelatedObservableType
 // ----------------------------------------------------------------------
 
-func (r *RelatedObservableType) AddConfidence(c ConfidenceType) {
-	r.Confidence = &c
+func (this *RelatedObservableType) AddConfidence(c ConfidenceType) {
+	this.Confidence = &c
 }
 
-func (r *RelatedObservableType) AddInformationSource(source InformationSourceType) {
-	r.InformationSource = &source
+func (this *RelatedObservableType) AddInformationSource(source InformationSourceType) {
+	this.InformationSource = &source
 }
 
-func (r *RelatedObservableType) AddRelationshipDetail(name, ref, value string) {
+func (this *RelatedObservableType) AddRelationshipDetail(name, ref, value string) {
 	data := ControlledVocabularyStringType{
 		VocabName:      name,
 		VocabReference: ref,
 		Value:          value,
 	}
-	r.Relationship = &data
+	this.Relationship = &data
 }
 
-func (r *RelatedObservableType) AddObservable(o cybox.ObservableType) {
-	r.Observable = &o
+func (this *RelatedObservableType) AddObservable(o observable.ObservableType) {
+	this.Observable = &o
 }

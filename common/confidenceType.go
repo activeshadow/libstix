@@ -4,65 +4,72 @@
 // that can be found in the LICENSE file in the root of the source
 // tree.
 
-// Version: 0.2
-
 package common
 
 import (
+	"github.com/freestix/libstix/defs"
 	"time"
 )
 
+// ----------------------------------------------------------------------
+// Define Types
+// ----------------------------------------------------------------------
+
 type ConfidenceType struct {
 	Timestamp                string                          `json:"timestamp,omitempty"`
-	TimestampPrecision       string                          `json:"timestampPrecision,omitempty"`
+	TimestampPrecision       string                          `json:"timestamp_precision,omitempty"`
 	Value                    *ControlledVocabularyStringType `json:"value,omitempty"`
 	Description              *StructuredTextType             `json:"description,omitempty"`
 	Source                   *InformationSourceType          `json:"source,omitempty"`
-	ConfidenceAssertionChain []ConfidenceType                `json:"confidenceAssertionChain,omitempty"`
+	ConfidenceAssertionChain []ConfidenceType                `json:"confidence_assertion_chain,omitempty"`
 }
 
 // ----------------------------------------------------------------------
 // Methods ConfidenceType
 // ----------------------------------------------------------------------
 
-func (c *ConfidenceType) CreateTimeStamp() {
-	c.Timestamp = time.Now().Format(time.RFC3339)
+func (this *ConfidenceType) CreateTimeStamp() {
+	this.Timestamp = time.Now().Format(time.RFC3339)
 }
 
-func (c *ConfidenceType) AddTimeStamp(t string) {
+func (this *ConfidenceType) AddTimeStamp(t string) {
 	// TODO Need to format the string in to ISO 8601 format or check that it is in the right format
-	c.Timestamp = t
+	this.Timestamp = t
 }
 
-func (c *ConfidenceType) AddTimeStampPrecision(p string) {
-	c.TimestampPrecision = p
+func (this *ConfidenceType) AddTimeStampPrecision(p string) {
+	this.TimestampPrecision = p
 }
 
-func (c *ConfidenceType) AddValueDetail(name, ref, value string) {
+func (this *ConfidenceType) AddValueDetail(name, ref, value string) {
 	data := ControlledVocabularyStringType{
 		VocabName:      name,
 		VocabReference: ref,
 		Value:          value,
 	}
-	c.Value = &data
+	this.Value = &data
 }
 
-func (c *ConfidenceType) AddDescription(value string) {
-	data := StructuredTextType{
-		StructuringFormat: "txt",
-		Value:             value,
-	}
-	c.Description = &data
+func (this *ConfidenceType) AddDescriptionText(value string) {
+	this.AddDescription(defs.RFC6838TEXTPLAIN, value)
 }
 
-func (c *ConfidenceType) AddSource(source InformationSourceType) {
-	c.Source = &source
+func (this *ConfidenceType) AddDescription(format, value string) {
+	var data StructuredTextType
+	data.AddFormat(format)
+	data.AddValue(value)
+
+	this.Description = &data
 }
 
-func (c *ConfidenceType) AddConfidenceAssertion(confidence ConfidenceType) {
-	if c.ConfidenceAssertionChain == nil {
+func (this *ConfidenceType) AddSource(source InformationSourceType) {
+	this.Source = &source
+}
+
+func (this *ConfidenceType) AddConfidenceAssertion(confidence ConfidenceType) {
+	if this.ConfidenceAssertionChain == nil {
 		a := make([]ConfidenceType, 0)
-		c.ConfidenceAssertionChain = a
+		this.ConfidenceAssertionChain = a
 	}
-	c.ConfidenceAssertionChain = append(c.ConfidenceAssertionChain, confidence)
+	this.ConfidenceAssertionChain = append(this.ConfidenceAssertionChain, confidence)
 }

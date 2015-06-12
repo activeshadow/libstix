@@ -4,8 +4,6 @@
 // that can be found in the LICENSE file in the root of the source
 // tree.
 
-// Version: 0.1
-
 package common
 
 import (
@@ -13,57 +11,61 @@ import (
 	"github.com/freestix/libstix/defs"
 )
 
+// ----------------------------------------------------------------------
+// Define Types
+// ----------------------------------------------------------------------
+
 type KillChainType struct {
 	Id             string               `json:"id,omitempty"`
 	Name           string               `json:"name,omitempty"`
 	Definer        string               `json:"definer,omitempty"`
 	Reference      string               `json:"reference,omitempty"`
-	NumberOfPhases int                  `json:"numberOfPhases,omitempty"`
-	KillChainPhase []KillChainPhaseType `json:"killChainPhase,omitempty"`
+	NumberOfPhases int                  `json:"number_of_phases,omitempty"`
+	KillChainPhase []KillChainPhaseType `json:"kill_chain_phase,omitempty"`
 }
 
 type KillChainPhaseType struct {
 	Ordinality int    `json:"ordinality,omitempty"`
 	Name       string `json:"name,omitempty"`
-	PhaseId    string `json:"phaseId,omitempty"`
+	PhaseId    string `json:"phase_id,omitempty"`
 }
 
 type KillChainPhaseReferenceType struct {
-	PhaseId       string `json:"phaseId,omitempty"`
+	PhaseId       string `json:"phase_id,omitempty"`
 	Name          string `json:"name,omitempty"`
 	Ordinality    int    `json:"ordinality,omitempty"`
-	KillChainId   string `json:"killChainId,omitempty"`
-	KillChainName string `json:"killChainName,omitempty"`
+	KillChainId   string `json:"kill_chain_id,omitempty"`
+	KillChainName string `json:"kill_chain_name,omitempty"`
 }
 
 // ----------------------------------------------------------------------
 // Methods KillChainType
 // ----------------------------------------------------------------------
 
-func (k *KillChainType) CreateId() {
-	k.Id = defs.COMPANY + ":TTP-" + uuid.New()
+func (this *KillChainType) CreateId() {
+	this.Id = defs.COMPANY + ":TTP-" + uuid.New()
 }
 
-func (k *KillChainType) AddName(n string) {
-	k.Name = n
+func (this *KillChainType) AddName(n string) {
+	this.Name = n
 }
 
-func (k *KillChainType) AddDefiner(d string) {
-	k.Definer = d
+func (this *KillChainType) AddDefiner(d string) {
+	this.Definer = d
 }
 
-func (k *KillChainType) AddReference(r string) {
-	k.Reference = r
+func (this *KillChainType) AddReference(r string) {
+	this.Reference = r
 }
 
-func (k *KillChainType) AddNumberOfPhases(n int) {
-	k.NumberOfPhases = n
+func (this *KillChainType) AddNumberOfPhases(n int) {
+	this.NumberOfPhases = n
 }
 
-func (k *KillChainType) AddPhase(n int, name string) {
-	if k.KillChainPhase == nil {
+func (this *KillChainType) AddPhase(n int, name string) {
+	if this.KillChainPhase == nil {
 		a := make([]KillChainPhaseType, 0)
-		k.KillChainPhase = a
+		this.KillChainPhase = a
 	}
 	phase := defs.COMPANY + ":TTP-" + uuid.New()
 	data := KillChainPhaseType{
@@ -71,5 +73,5 @@ func (k *KillChainType) AddPhase(n int, name string) {
 		Name:       name,
 		PhaseId:    phase,
 	}
-	k.KillChainPhase = append(k.KillChainPhase, data)
+	this.KillChainPhase = append(this.KillChainPhase, data)
 }

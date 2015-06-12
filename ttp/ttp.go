@@ -14,7 +14,7 @@ import (
 
 type TTPsType struct {
 	TTP        *TTPType               `json:"ttp,omitempty"`
-	KillChains []common.KillChainType `json:"killChains,omitempty"`
+	KillChains []common.KillChainType `json:"kill_chains,omitempty"`
 }
 
 type TTPType struct {
@@ -24,7 +24,7 @@ type TTPType struct {
 	Version          string                     `json:"version,omitempty"`
 	Title            string                     `json:"title,omitempty"`
 	Description      *common.StructuredTextType `json:"description,omitempty"`
-	ShortDescription *common.StructuredTextType `json:"shortDescription,omitempty"`
+	ShortDescription *common.StructuredTextType `json:"short_description,omitempty"`
 }
 
 // ----------------------------------------------------------------------

@@ -4,20 +4,24 @@
 // that can be found in the LICENSE file in the root of the source
 // tree.
 
-// Version: 0.1
 // TODO Tools
 
 package common
 
 import (
 	"github.com/freestix/libcybox/common"
+	"github.com/freestix/libstix/defs"
 )
+
+// ----------------------------------------------------------------------
+// Define Types
+// ----------------------------------------------------------------------
 
 type InformationSourceType struct {
 	Description         *StructuredTextType             `json:"description,omitempty"`
 	Identity            *IdentityType                   `json:"identity,omitempty"`
 	Role                *ControlledVocabularyStringType `json:"role,omitempty"`
-	ContributingSources []InformationSourceType         `json:"contributingSources,omitempty"`
+	ContributingSources []InformationSourceType         `json:"contributing_sources,omitempty"`
 	Time                *common.TimeType                `json:"time,omitempty"`
 	Tools               []common.ToolInformationType    `json:"tools,omitempty"`
 	References          []string                        `json:"references,omitempty"`
@@ -27,25 +31,29 @@ type InformationSourceType struct {
 // Methods InformationSourceType
 // ----------------------------------------------------------------------
 
-func (s *InformationSourceType) AddDescription(value string) {
-	data := StructuredTextType{
-		StructuringFormat: "txt",
-		Value:             value,
-	}
-	s.Description = &data
+func (this *InformationSourceType) AddDescriptionText(value string) {
+	this.AddDescription(defs.RFC6838TEXTPLAIN, value)
 }
 
-func (s *InformationSourceType) AddIdentity(id IdentityType) {
-	s.Identity = &id
+func (this *InformationSourceType) AddDescription(format, value string) {
+	var data StructuredTextType
+	data.AddFormat(format)
+	data.AddValue(value)
+
+	this.Description = &data
 }
 
-func (s *InformationSourceType) AddRoleDetail(name, ref, value string) {
+func (this *InformationSourceType) AddIdentity(id IdentityType) {
+	this.Identity = &id
+}
+
+func (this *InformationSourceType) AddRoleDetail(name, ref, value string) {
 	data := ControlledVocabularyStringType{
 		VocabName:      name,
 		VocabReference: ref,
 		Value:          value,
 	}
-	s.Role = &data
+	this.Role = &data
 }
 
 func (s *InformationSourceType) AddContributingSource(source InformationSourceType) {

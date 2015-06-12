@@ -9,7 +9,8 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/freestix/libcybox/cybox"
+	"github.com/freestix/libcybox/object"
+	"github.com/freestix/libcybox/observable"
 	"github.com/freestix/libstix/indicator"
 	"github.com/freestix/libstix/stix"
 )
@@ -21,18 +22,17 @@ func main() {
 	i1.AddTitle("Attack 2015-02")
 	i1.AddType("IP Watchlist")
 
-	o := cybox.New()
+	o := observable.New()
 
-	obj := cybox.CreateObject("UriObj:UriObjectType", "URL")
-	obj.CreateId()
+	obj := object.NewObject()
 
-	uriObj := cybox.CreateUriObject()
-	uriObj.CreateId()
+	uriObj := object.NewProperties()
+	uriObj.AddType("URL")
 	uriObj.AddUriObject("http://foo.com")
 	uriObj.AddUriObject("http://bar.com")
 	uriObj.AddUriObject("http://fooandbar.com")
 
-	obj.AddUriObject(uriObj)
+	obj.AddProperties(uriObj)
 
 	o.AddObject(obj)
 

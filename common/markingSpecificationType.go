@@ -4,8 +4,6 @@
 // that can be found in the LICENSE file in the root of the source
 // tree.
 
-// Version: 0.2
-
 package common
 
 import (
@@ -13,48 +11,52 @@ import (
 	"github.com/freestix/libstix/defs"
 )
 
+// ----------------------------------------------------------------------
+// Define Types
+// ----------------------------------------------------------------------
+
 type MarkingSpecificationType struct {
 	Id                  string                 `json:"id,omitempty"`
 	IdRef               string                 `json:"idref,omitempty"`
 	Version             string                 `json:"version,omitempty"`
-	ControlledStructure string                 `json:"controlledStructure,omitempty"`
-	MarkingStructure    *MarkingStructureType  `json:"markingStructure,omitempty"`
-	InformationSource   *InformationSourceType `json:"informationSource,omitempty"`
+	ControlledStructure string                 `json:"controlled_structure,omitempty"`
+	MarkingStructure    *MarkingStructureType  `json:"marking_structure,omitempty"`
+	InformationSource   *InformationSourceType `json:"information_source,omitempty"`
 }
 
 // ----------------------------------------------------------------------
 // Methods MarkingSpecificationType
 // ----------------------------------------------------------------------
 
-func (m *MarkingSpecificationType) CreateId() {
-	m.Id = defs.COMPANY + ":marking-" + uuid.New()
+func (this *MarkingSpecificationType) CreateId() {
+	this.Id = defs.COMPANY + ":marking-" + uuid.New()
 }
 
-func (m *MarkingSpecificationType) AddIdRef(idref string) {
-	m.IdRef = idref
+func (this *MarkingSpecificationType) AddIdRef(idref string) {
+	this.IdRef = idref
 }
 
 // Data_Marking schema version for this content.
-func (m *MarkingSpecificationType) AddVersion(ver string) {
-	m.Version = ver
+func (this *MarkingSpecificationType) AddVersion(ver string) {
+	this.Version = ver
 }
 
-func (m *MarkingSpecificationType) AddControlledStructure(s string) {
-	m.ControlledStructure = s
+func (this *MarkingSpecificationType) AddControlledStructure(s string) {
+	this.ControlledStructure = s
 }
 
-func (m *MarkingSpecificationType) AddMarkingStructure(mark MarkingStructureType) {
-	m.MarkingStructure = &mark
+func (this *MarkingSpecificationType) AddMarkingStructure(mark MarkingStructureType) {
+	this.MarkingStructure = &mark
 }
 
-func (m *MarkingSpecificationType) AddTLPMarking(value string) {
+func (this *MarkingSpecificationType) AddTLPMarking(value string) {
 	data := MarkingStructureType{
 		MarkingModelName: defs.MARKING_TLP_VOCAB,
 		Value:            value,
 	}
-	m.MarkingStructure = &data
+	this.MarkingStructure = &data
 }
 
-func (m *MarkingSpecificationType) AddInformationSource(source InformationSourceType) {
-	m.InformationSource = &source
+func (this *MarkingSpecificationType) AddInformationSource(source InformationSourceType) {
+	this.InformationSource = &source
 }

@@ -4,8 +4,6 @@
 // that can be found in the LICENSE file in the root of the source
 // tree.
 
-// Version: 0.2
-
 package common
 
 import (
@@ -13,9 +11,13 @@ import (
 	"github.com/freestix/libstix/defs"
 )
 
+// ----------------------------------------------------------------------
+// Define Types
+// ----------------------------------------------------------------------
+
 type MarkingStructureType struct {
-	MarkingModelName string `json:"markingModelName,omitempty"`
-	MarkingModelRef  string `json:"markingModelRef,omitempty"`
+	MarkingModelName string `json:"marking_model_name,omitempty"`
+	MarkingModelRef  string `json:"marking_model_ref,omitempty"`
 	Id               string `json:"id,omitempty"`
 	IdRef            string `json:"idref,omitempty"`
 	Value            string `json:"value,omitempty"`
@@ -25,22 +27,22 @@ type MarkingStructureType struct {
 // Methods MarkingStructureType
 // ----------------------------------------------------------------------
 
-func (m *MarkingStructureType) AddModelName(n string) {
-	m.MarkingModelName = n
+func (this *MarkingStructureType) AddModelName(n string) {
+	this.MarkingModelName = n
 }
 
-func (m *MarkingStructureType) AddModelRef(r string) {
-	m.MarkingModelRef = r
+func (this *MarkingStructureType) AddModelRef(r string) {
+	this.MarkingModelRef = r
 }
 
-func (m *MarkingStructureType) CreateId() {
-	m.Id = defs.COMPANY + ":marking-" + uuid.New()
+func (this *MarkingStructureType) CreateId() {
+	this.Id = defs.COMPANY + ":marking-" + uuid.New()
 }
 
-func (m *MarkingStructureType) AddIdRef(idref string) {
-	m.IdRef = idref
+func (this *MarkingStructureType) AddIdRef(idref string) {
+	this.IdRef = idref
 }
 
-func (m *MarkingStructureType) AddValue(s string) {
-	m.Value = s
+func (this *MarkingStructureType) AddValue(s string) {
+	this.Value = s
 }
