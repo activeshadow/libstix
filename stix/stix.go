@@ -56,7 +56,6 @@ func (this *StixPackageType) CreateId() {
 	this.StixMessage.Id = defs.COMPANY + ":package-" + uuid.New()
 }
 
-// This function will add an IDRef to the package
 func (this *StixPackageType) AddIdRef(idref string) {
 	this.StixMessage.IdRef = idref
 }

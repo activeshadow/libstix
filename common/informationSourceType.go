@@ -4,27 +4,27 @@
 // that can be found in the LICENSE file in the root of the source
 // tree.
 
-// TODO Tools
-
 package common
 
 import (
 	"github.com/freestix/libcybox/common"
 	"github.com/freestix/libstix/defs"
+	"time"
 )
 
 // ----------------------------------------------------------------------
 // Define Types
 // ----------------------------------------------------------------------
+// TODO Tools
 
 type InformationSourceType struct {
-	Description         *StructuredTextType             `json:"description,omitempty"`
 	Identity            *IdentityType                   `json:"identity,omitempty"`
 	Role                *ControlledVocabularyStringType `json:"role,omitempty"`
-	ContributingSources []InformationSourceType         `json:"contributing_sources,omitempty"`
+	Description         *StructuredTextType             `json:"description,omitempty"`
+	References          []string                        `json:"references,omitempty"`
 	Time                *common.TimeType                `json:"time,omitempty"`
 	Tools               []common.ToolInformationType    `json:"tools,omitempty"`
-	References          []string                        `json:"references,omitempty"`
+	ContributingSources []InformationSourceType         `json:"contributing_sources,omitempty"`
 }
 
 // ----------------------------------------------------------------------
@@ -88,6 +88,10 @@ func (s *InformationSourceType) AddEndTime(t string) {
 		Value:     t,
 	}
 	s.Time.EndTime = &t1
+}
+
+func (this *InformationSourceType) SetProducedTimeToNow() {
+	this.AddProducedTime(time.Now().Format(time.RFC3339))
 }
 
 func (s *InformationSourceType) AddProducedTime(t string) {
