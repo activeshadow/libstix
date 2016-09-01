@@ -7,7 +7,7 @@
 package common
 
 import (
-	"github.com/freestix/libstix/defs"
+	"github.com/freestix/libstix"
 	"github.com/pborman/uuid"
 )
 
@@ -34,7 +34,7 @@ type RelatedIdentityType struct {
 // ----------------------------------------------------------------------
 
 func (this *IdentityType) CreateId() {
-	this.Id = defs.COMPANY + ":identity-" + uuid.New()
+	this.Id = libstix.Company + ":identity-" + uuid.New()
 }
 
 func (this *IdentityType) AddIdRef(idref string) {

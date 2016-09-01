@@ -9,7 +9,7 @@ package stix
 import (
 	"time"
 
-	"github.com/freestix/libstix/defs"
+	"github.com/freestix/libstix"
 	"github.com/freestix/libstix/indicator"
 	"github.com/freestix/libstix/ttp"
 	"github.com/pborman/uuid"
@@ -54,7 +54,7 @@ func CreateStixMessage() StixPackageType {
 // ----------------------------------------------------------------------
 
 func (this *StixPackageType) CreateId() {
-	this.StixMessage.Id = defs.COMPANY + ":package-" + uuid.New()
+	this.StixMessage.Id = libstix.Company + ":package-" + uuid.New()
 }
 
 func (this *StixPackageType) AddIdRef(idref string) {

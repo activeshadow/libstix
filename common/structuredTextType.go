@@ -7,7 +7,7 @@
 package common
 
 import (
-	"github.com/freestix/libstix/defs"
+	"github.com/freestix/libstix"
 	"github.com/pborman/uuid"
 )
 
@@ -27,7 +27,7 @@ type StructuredTextType struct {
 // ----------------------------------------------------------------------
 
 func (this *StructuredTextType) CreateId() {
-	this.Id = defs.COMPANY + ":text-" + uuid.New()
+	this.Id = libstix.Company + ":text-" + uuid.New()
 }
 
 func (this *StructuredTextType) AddMarkingIdRef(markingidref string) {

@@ -7,3 +7,8 @@
 package libstix
 
 // Version = "0.1.1"
+
+var (
+	Company   = "example"
+	CompanyNS = "http://example.com"
+)

@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"github.com/freestix/libcybox/observable"
+	"github.com/freestix/libstix"
 	"github.com/freestix/libstix/common"
 	"github.com/freestix/libstix/defs"
 	"github.com/pborman/uuid"
@@ -98,7 +99,7 @@ func CreateIndicator() IndicatorType {
 // ----------------------------------------------------------------------
 
 func (this *IndicatorType) CreateId() {
-	this.Id = defs.COMPANY + ":indicator-" + uuid.New()
+	this.Id = libstix.Company + ":indicator-" + uuid.New()
 }
 
 func (this *IndicatorType) AddIdRef(idref string) {
