@@ -7,8 +7,8 @@
 package common
 
 import (
+	"github.com/activeshadow/libstix"
 	"github.com/pborman/uuid"
-	"github.com/activeshadow/libstix/defs"
 )
 
 // ----------------------------------------------------------------------
@@ -43,7 +43,7 @@ type KillChainPhaseReferenceType struct {
 // ----------------------------------------------------------------------
 
 func (this *KillChainType) CreateId() {
-	this.Id = defs.COMPANY + ":TTP-" + uuid.New()
+	this.Id = libstix.Company + ":TTP-" + uuid.New()
 }
 
 func (this *KillChainType) AddName(n string) {
@@ -67,7 +67,7 @@ func (this *KillChainType) AddPhase(n int, name string) {
 		a := make([]KillChainPhaseType, 0)
 		this.KillChainPhase = a
 	}
-	phase := defs.COMPANY + ":TTP-" + uuid.New()
+	phase := libstix.Company + ":TTP-" + uuid.New()
 	data := KillChainPhaseType{
 		Ordinality: n,
 		Name:       name,

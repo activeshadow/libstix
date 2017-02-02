@@ -7,8 +7,8 @@
 package common
 
 import (
+	"github.com/activeshadow/libstix"
 	"github.com/pborman/uuid"
-	"github.com/activeshadow/libstix/defs"
 )
 
 // ----------------------------------------------------------------------
@@ -36,7 +36,7 @@ func (this *MarkingStructureType) AddModelRef(r string) {
 }
 
 func (this *MarkingStructureType) CreateId() {
-	this.Id = defs.COMPANY + ":marking-" + uuid.New()
+	this.Id = libstix.Company + ":marking-" + uuid.New()
 }
 
 func (this *MarkingStructureType) AddIdRef(idref string) {

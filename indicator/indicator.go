@@ -7,10 +7,11 @@
 package indicator
 
 import (
-	"github.com/pborman/uuid"
 	"github.com/activeshadow/libcybox/observable"
+	"github.com/activeshadow/libstix"
 	"github.com/activeshadow/libstix/common"
 	"github.com/activeshadow/libstix/defs"
+	"github.com/pborman/uuid"
 	"time"
 )
 
@@ -97,7 +98,7 @@ func CreateIndicator() IndicatorType {
 // ----------------------------------------------------------------------
 
 func (this *IndicatorType) CreateId() {
-	this.Id = defs.COMPANY + ":indicator-" + uuid.New()
+	this.Id = libstix.Company + ":indicator-" + uuid.New()
 }
 
 func (this *IndicatorType) AddIdRef(idref string) {

@@ -7,10 +7,10 @@
 package stix
 
 import (
-	"github.com/pborman/uuid"
-	"github.com/activeshadow/libstix/defs"
+	"github.com/activeshadow/libstix"
 	"github.com/activeshadow/libstix/indicator"
 	"github.com/activeshadow/libstix/ttp"
+	"github.com/pborman/uuid"
 	"time"
 )
 
@@ -53,7 +53,7 @@ func CreateStixMessage() StixPackageType {
 // ----------------------------------------------------------------------
 
 func (this *StixPackageType) CreateId() {
-	this.StixMessage.Id = defs.COMPANY + ":package-" + uuid.New()
+	this.StixMessage.Id = libstix.Company + ":package-" + uuid.New()
 }
 
 func (this *StixPackageType) AddIdRef(idref string) {

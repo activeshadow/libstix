@@ -7,8 +7,9 @@
 package common
 
 import (
-	"github.com/pborman/uuid"
+	"github.com/activeshadow/libstix"
 	"github.com/activeshadow/libstix/defs"
+	"github.com/pborman/uuid"
 )
 
 // ----------------------------------------------------------------------
@@ -29,7 +30,7 @@ type MarkingSpecificationType struct {
 // ----------------------------------------------------------------------
 
 func (this *MarkingSpecificationType) CreateId() {
-	this.Id = defs.COMPANY + ":marking-" + uuid.New()
+	this.Id = libstix.Company + ":marking-" + uuid.New()
 }
 
 func (this *MarkingSpecificationType) AddIdRef(idref string) {
