@@ -7,7 +7,7 @@
 package common
 
 import (
-	"github.com/freestix/libstix/defs"
+	"github.com/activeshadow/libstix/defs"
 	"time"
 )
 

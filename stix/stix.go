@@ -7,10 +7,10 @@
 package stix
 
 import (
-	"code.google.com/p/go-uuid/uuid"
-	"github.com/freestix/libstix/defs"
-	"github.com/freestix/libstix/indicator"
-	"github.com/freestix/libstix/ttp"
+	"github.com/pborman/uuid"
+	"github.com/activeshadow/libstix/defs"
+	"github.com/activeshadow/libstix/indicator"
+	"github.com/activeshadow/libstix/ttp"
 	"time"
 )
 

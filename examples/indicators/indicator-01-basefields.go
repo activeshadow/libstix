@@ -9,7 +9,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/freestix/libstix/stix"
+	"github.com/activeshadow/libstix/stix"
 )
 
 func main() {

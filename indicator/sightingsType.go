@@ -7,8 +7,8 @@
 package indicator
 
 import (
-	"github.com/freestix/libstix/common"
-	"github.com/freestix/libstix/defs"
+	"github.com/activeshadow/libstix/common"
+	"github.com/activeshadow/libstix/defs"
 	"time"
 )
 

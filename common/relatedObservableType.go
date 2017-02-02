@@ -7,7 +7,7 @@
 package common
 
 import (
-	"github.com/freestix/libcybox/observable"
+	"github.com/activeshadow/libcybox/observable"
 )
 
 // ----------------------------------------------------------------------

@@ -7,8 +7,8 @@
 package common
 
 import (
-	"code.google.com/p/go-uuid/uuid"
-	"github.com/freestix/libstix/defs"
+	"github.com/pborman/uuid"
+	"github.com/activeshadow/libstix/defs"
 )
 
 // ----------------------------------------------------------------------

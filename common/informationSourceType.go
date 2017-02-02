@@ -7,8 +7,8 @@
 package common
 
 import (
-	"github.com/freestix/libcybox/common"
-	"github.com/freestix/libstix/defs"
+	"github.com/activeshadow/libcybox/common"
+	"github.com/activeshadow/libstix/defs"
 	"time"
 )
 

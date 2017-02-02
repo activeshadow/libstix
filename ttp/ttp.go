@@ -7,7 +7,7 @@
 package ttp
 
 import (
-	"github.com/freestix/libstix/common"
+	"github.com/activeshadow/libstix/common"
 )
 
 type TTPsType struct {

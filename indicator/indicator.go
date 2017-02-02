@@ -7,10 +7,10 @@
 package indicator
 
 import (
-	"code.google.com/p/go-uuid/uuid"
-	"github.com/freestix/libcybox/observable"
-	"github.com/freestix/libstix/common"
-	"github.com/freestix/libstix/defs"
+	"github.com/pborman/uuid"
+	"github.com/activeshadow/libcybox/observable"
+	"github.com/activeshadow/libstix/common"
+	"github.com/activeshadow/libstix/defs"
 	"time"
 )
 

@@ -7,7 +7,7 @@
 package indicator
 
 import (
-	"github.com/freestix/libstix/common"
+	"github.com/activeshadow/libstix/common"
 )
 
 // ----------------------------------------------------------------------
